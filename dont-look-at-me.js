@@ -15,7 +15,8 @@ function getData() {
   })
 }
 
-// make array JSON with set keys
+// Makes array JSON with set keys
+// Because I've concluded Go hates JSON hates Go hates me
 async function makeABetterJSON() {
   const data = await getData()
 
