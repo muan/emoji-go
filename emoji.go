@@ -6,8 +6,7 @@ import "encoding/json"
 import "io/ioutil"
 import s "strings"
 
-type emojiT struct {
-  Name string
+type emoji struct {
   Keywords []string
   Char string
   Fitzpatrick_scale bool
@@ -22,12 +21,12 @@ func main()  {
     data := getLib()
     fmt.Println("Keyword:", query)
     var results []string
-    for _, emoji := range data {
-      if s.Index(emoji.Name, query) >= 0 {
-        if emoji.Name == query {
-          results = append([]string{emoji.Char}, results...)
+    for key, item := range data {
+      if s.Index(key, query) >= 0 {
+        if key == query {
+          results = append([]string{item.Char}, results...)
         } else {
-          results = append(results, emoji.Char)
+          results = append(results, item.Char)
         }
       }
     }
@@ -47,9 +46,9 @@ func main()  {
   }
 }
 
-func getLib() []emojiT {
-  lib, _ := ioutil.ReadFile("./emoji-for-go.json")
-  var data []emojiT
+func getLib() map[string]emoji {
+  lib, _ := ioutil.ReadFile("./emoji.json")
+  var data map[string]emoji
   json.Unmarshal([]byte(string(lib)), &data)
   return data
 }
