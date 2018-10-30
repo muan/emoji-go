@@ -8,7 +8,6 @@ function getData() {
       let data = ''
       res.on('data', chunk => data += chunk)
       res.on('end', () => {
-        console.log(data)
         resolve(JSON.parse(data))
       })
     })
@@ -16,7 +15,7 @@ function getData() {
 }
 
 // Makes array JSON with set keys
-// Because I've concluded Go hates JSON hates Go hates me
+// Because I've concluded Go hates arbitrary JSON hates Go hates me
 async function makeABetterJSON() {
   const data = await getData()
 
